@@ -3,14 +3,14 @@
 <%- include('../partials/head') %>
 <body>
     <div class="form-wrapper">
-        <h1>Log In</h1>
+        <h1>Sign Up</h1>
 
         <!--SHOW ERRORS FROM EXPRESS-FLASH-->
         <% if(messages.error) { %>
         <span class="error-message"><%= messages.error %></span>
         <% } %>
 
-        <form class="form" method="POST" action="/login">
+        <form class="form" method="POST" action="/register">
            <div class="input-wrapper">
                 <label class="label" for="email">Email</label>
                 <input class="input" name="email" id="email" type="email" />
@@ -19,7 +19,7 @@
                 <label class="label" for="password">Password</label>
                 <input class="input" name="password" id="password" type="password" />
             </div>  
-            <input class="form-button" type="submit" value="Sign In"/>
+            <input class="form-button" type="submit" value="Sign Up"/>
         </form>
     </div>    
 </body>
