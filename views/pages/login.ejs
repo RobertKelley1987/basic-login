@@ -2,25 +2,31 @@
 <html lang="en">
 <%- include('../partials/head') %>
 <body>
-    <div class="form-wrapper">
-        <h1>Log In</h1>
+    <div class="page">
+        <%- include('../partials/header') %>
 
         <!--SHOW ERRORS FROM EXPRESS-FLASH-->
         <% if(messages.error) { %>
-        <span class="error-message"><%= messages.error %></span>
+            <p class="flash-error"><%= messages.error %></p>
         <% } %>
 
-        <form class="form" method="POST" action="/login">
-           <div class="input-wrapper">
-                <label class="label" for="email">Email</label>
-                <input class="input" name="email" id="email" type="email" />
-           </div>
-           <div class="input-wrapper">
-                <label class="label" for="password">Password</label>
-                <input class="input" name="password" id="password" type="password" />
-            </div>  
-            <input class="form-button" type="submit" value="Sign In"/>
-        </form>
-    </div>    
+        <div class="login-wrapper flex-center">
+            <div class="form-wrapper">
+                <h1>Sign In</h1>
+
+                <form class="form" method="POST" action="/login">
+                    <div class="input-wrapper">
+                            <label class="label" for="email">Email</label>
+                            <input class="input" name="email" id="email" type="email" />
+                    </div>
+                    <div class="input-wrapper">
+                        <label class="label" for="password">Password</label>
+                        <input class="input" name="password" id="password" type="password" />
+                    </div>  
+                    <input class="form-button" type="submit" value="Sign In"/>
+                </form>
+            </div>
+        </div>   
+    </div> 
 </body>
 </html>

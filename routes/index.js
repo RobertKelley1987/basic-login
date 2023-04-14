@@ -1,37 +1,20 @@
 const router = require('express').Router();
-const tryCatch = require('../util/try-catch');
-const User = require('../models/user');
-const validateUser = require('../middleware/validateUser');
+const { getIndex } = require('../controllers/content');
+const { getLogin, login, logout, getRegister, register } = require('../controllers/users');
 const isLoggedIn = require('../middleware/isLoggedIn');
+const validateUser = require('../middleware/validateUser');
+const tryCatch = require('../util/try-catch');
 
-router.get('/', isLoggedIn, async (req, res) => {
-    const { email } = await User.findById(req.session.userId);
-    res.render('pages/home', { email });
-});
+router.get('/', isLoggedIn, getIndex);
 
-router.get('/login', (req, res) => res.render('pages/login'));
+router.route('/login')
+    .get(getLogin)
+    .post(validateUser, tryCatch(login));
 
-router.post('/login', validateUser, tryCatch(async (req, res) => {
-        
-}));
+router.post('/logout', logout);
 
-router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.redirect('/login');
-});
-
-router.get('/register', (req, res) => res.render('pages/register'));
-
-router.post('/register', tryCatch(async (req, res, next) => {
-    const { email, password } = req.body;
-    const newUser = new User({ email: email, password: password });
-    await newUser.save();
-    if(!newUser) {
-        req.flash('error', 'Server error creating new user. Please try again.');
-        return res.render('pages/register');
-    }
-    req.session.userId = newUser._id;
-    res.render('pages/home', { email });
-}));
+router.route('/register')
+    .get(getRegister)
+    .post(validateUser, tryCatch(register));
 
 module.exports = router;
