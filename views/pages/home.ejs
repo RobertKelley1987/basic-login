@@ -2,9 +2,11 @@
 <html lang="en">
 <%- include('../partials/head') %>
 <body>
-    <h1>Welcome <%= email %></h1>  
-    <form method="POST" action="/logout">
-        <input class="form-button" type="submit" value="Sign Out"/>
-    </form>
+    <div class="page flex-center">
+        <h1 class="text-centered">Welcome <%= email %></h1>  
+        <form method="POST" action="/logout">
+            <input class="form-button" type="submit" value="Sign Out"/>
+        </form>
+    </div>
 </body>
 </html>

@@ -2,17 +2,17 @@ const bcrypt = require('bcrypt');
 const ExpressError = require('../util/express-error');
 const User = require('../models/user');
 
-exports.getLogin = (req, res) => res.render('pages/login');
+exports.getLogin = (req, res) => res.render('pages/login', { email: '', password: '' });
 
 exports.login = async (req, res, next) => {
     const { email, password } = req.body;
     const foundUser = await User.findOne({ email: email });
     if(!foundUser) {
-        throw new ExpressError(400, 'Incorrect username or password.', 'login');
+        throw new ExpressError(400, 'Incorrect username or password.', 'VALIDATION_ERR', 'login');
     } 
     const passwordMatch = await bcrypt.compare(password, foundUser.password)
     if(!passwordMatch) {
-        throw new ExpressError(400, 'Incorrect username or password.', 'login');
+        throw new ExpressError(400, 'Incorrect username or password.', 'VALIDATION_ERR', 'login');
     }
     req.session.userId = foundUser._id;
     res.redirect('/');
@@ -35,4 +35,4 @@ exports.register = async (req, res, next) => {
     res.redirect('/');
 }
 
-exports.getRegister = (req, res) => res.render('pages/register');
+exports.getRegister = (req, res) => res.render('pages/register', { email: '', password: '' });

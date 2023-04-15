@@ -18,6 +18,7 @@ userSchema.pre('save', async function(next) {
     }
 });
 
-userSchema.plugin(uniqueValidator); // plugin validates original usernames
+// plugin to validate unique emails
+userSchema.plugin(uniqueValidator, { message: 'UNIQUE_VALIDATION_ERR' }); 
 
 module.exports = mongoose.model('User', userSchema);

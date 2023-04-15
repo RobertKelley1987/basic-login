@@ -14,19 +14,20 @@
             <div class="form-wrapper">
                 <h1>Sign In</h1>
 
-                <form class="form" method="POST" action="/login">
+                <form id="login-form" class="form" method="POST" action="/login">
                     <div class="input-wrapper">
                             <label class="label" for="email">Email</label>
-                            <input class="input" name="email" id="email" type="email" />
+                            <input class="input" name="email" id="email" type="email" value="<%= email %>" />
                     </div>
                     <div class="input-wrapper">
                         <label class="label" for="password">Password</label>
-                        <input class="input" name="password" id="password" type="password" />
+                        <input class="input" name="password" id="password" type="password" value="<%= password %>" />
                     </div>  
-                    <input class="form-button" type="submit" value="Sign In"/>
+                    <input id="submit-button" class="form-button" type="submit" value="Sign In" disabled="true"/>
                 </form>
             </div>
         </div>   
     </div> 
+    <%- include('../partials/form-script') %>
 </body>
 </html>

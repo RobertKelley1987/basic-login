@@ -1,20 +1,18 @@
 const handleErrors = (err, req, res, next) => {
-    if(err.errors) {
-        const { email, password } = err.errors;
-        if(email && email.kind === 'unique') {
-            req.flash('error', 'An account with this email address already exists');
-        }
-        if(email && email.kind === 'required' || password && password.kind === 'required') {
-            req.flash('error', 'Please provide both an email and password');
-        }
-        return res.render('pages/register');
+    const { type, src, message } = err;
+    const { email, password } = req.body;
+
+    if(type === 'VALIDATION_ERR') {
+        req.flash('error', message);
+        return res.render(`pages/${src}`, { email, password });
     }
 
-    if(err.src === 'login') {
-        req.flash('error', 'Incorrect username or password.');
-        return res.render('pages/login');
+    if(message.includes('UNIQUE_VALIDATION_ERR')) {
+        req.flash('error', 'An account using this email address already exists');
+        return res.render('pages/register', { email, password });
     }
 
+    console.log('ERROR MESSAGE: ' + err.message);
     console.log(err);
 }
 

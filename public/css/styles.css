@@ -33,7 +33,7 @@ li a:hover {
     text-decoration: underline;
 }
 
-/* REUSABLE CLASSES */
+/* UTILITY */
 .page {
     display: flex;
     flex-direction: column;
@@ -50,6 +50,10 @@ li a:hover {
     background-color: rgb(255, 186, 186);
     color: red;
     padding: 1rem;
+}
+
+.text-centered {
+    text-align: center;
 }
 
 /* FORMS */
@@ -85,4 +89,15 @@ li a:hover {
     background-color: var(--black);
     color: white;
     cursor: pointer;
+}
+
+.form-button:disabled {
+    opacity: .7;
+}
+
+.form-button:disabled:hover {
+    background-color: white;
+    border: 1px solid var(--black);
+    color: var(--black);
+    cursor: unset;   
 }
